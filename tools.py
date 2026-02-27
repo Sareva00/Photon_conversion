@@ -1,12 +1,10 @@
 # Function to format numbers in scientific notation for plots
 
-from matplotlib.ticker import ScalarFormatter
+
 import numpy as np
 
 
-f =  ScalarFormatter(useOffset=False, useMathText=True)
-f.set_scientific(True)
-f.set_powerlimits((0, 0))
+
 
 def sci_notation(x):
     if x == 0:

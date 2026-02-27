@@ -8,12 +8,16 @@
 import matplotlib.pyplot as plt
 from matplotlib.figure import Figure
 from matplotlib.axes import Axes
-from matplotlib.ticker import AutoMinorLocator, MaxNLocator
+from matplotlib.ticker import AutoMinorLocator, MaxNLocator, ScalarFormatter
 import seaborn as sns
 
 plt.rcParams['font.size']=12
-width =  508.0
+width =  508.0  # in pt, for two columns papers in A&A, ApJ, MNRAS
 widthcol = 244
+
+f =  ScalarFormatter(useOffset=False, useMathText=True)
+f.set_scientific(True)
+f.set_powerlimits((0, 0))
 
 def set_size(width, fraction=1,subplots=(1, 1)):
     """Set figure dimensions to avoid scaling in LaTeX.
@@ -65,7 +69,7 @@ def set_ticks(ax: Axes) -> None:
     ax.tick_params(direction='in', which='minor', length=5, bottom=True, top=True, left=True, right=True)
     ax.tick_params(direction='in', which='major', length=10, bottom=True, top=True, left=True, right=True)
 
-    ax.grid(True, which='both', linestyle='--', linewidth=0.4)
+    ax.grid(True, which='both', linestyle='--', linewidth=0.3, alpha=0.7)
 
 def set_labels(ax: Axes, x_label: str, x_log: bool, y_label: str, y_log: bool, title: str) -> None:
     """Set customised labels and title for a given Axes object."""
