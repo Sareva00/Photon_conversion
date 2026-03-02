@@ -96,6 +96,9 @@ def set_colors(num: int, palette: str = "rocket") -> list:
     if palette == "personal" and num <= 8:
         colors4 = ['#c3121e', '#0348a1', '#ffb01c', '#027608', '#0193b0', '#9c5300', '#949c01', '#7104b5']       
         return colors4[:num]
+    elif palette == "dark_photons" and num <= 5:
+        colors_dp = ["#5386e4","#4c4b63","#ce5374","#ffba08","#629677"]
+        return colors_dp[:num]
     elif palette in sns.palettes.SEABORN_PALETTES:
         return sns.color_palette(palette, num)
     elif palette in plt.colormaps:
