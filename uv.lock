@@ -453,6 +453,7 @@ dependencies = [
     { name = "scipy" },
     { name = "seaborn" },
     { name = "simpy" },
+    { name = "tol-colors" },
 ]
 
 [package.dev-dependencies]
@@ -468,6 +469,7 @@ requires-dist = [
     { name = "scipy", specifier = ">=1.16.3" },
     { name = "seaborn", specifier = ">=0.13.2" },
     { name = "simpy", specifier = ">=4.1.1" },
+    { name = "tol-colors", specifier = ">=2.2.0" },
 ]
 
 [package.metadata.requires-dev]
@@ -719,6 +721,19 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/28/e3/55dcc2cfbc3ca9c29519eb6884dd1415ecb53b0e934862d3559ddcb7e20b/stack_data-0.6.3.tar.gz", hash = "sha256:836a778de4fec4dcd1dcd89ed8abff8a221f58308462e1c4aa2a3cf30148f0b9", size = 44707, upload-time = "2023-09-30T13:58:05.479Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/f1/7b/ce1eafaf1a76852e2ec9b22edecf1daa58175c090266e9f6c64afcd81d91/stack_data-0.6.3-py3-none-any.whl", hash = "sha256:d5558e0c25a4cb0853cddad3d77da9891a08cb85dd9f9f91b9f8cd66e511e695", size = 24521, upload-time = "2023-09-30T13:58:03.53Z" },
+]
+
+[[package]]
+name = "tol-colors"
+version = "2.2.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "matplotlib" },
+    { name = "numpy" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/2a/18/c4877a3dfd90a7350da789fb3e23f2a0a711eb13d56f3c9f6ce1aa9876b9/tol_colors-2.2.0.tar.gz", hash = "sha256:212ff02e2fcf5c7f9cdb928ba1701bcfbf7fe7a24c52a838488e1db398115db6", size = 1903153, upload-time = "2026-01-12T14:28:10.815Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/b6/71/113f6baf45953f214f7de1a3cc1494fb0289641a93adc42ba78eaec5c513/tol_colors-2.2.0-py3-none-any.whl", hash = "sha256:f9a13efbbdc9469ee73a4b497c2e7b2acd7e36ad78cfa5a227c1589826ae74f5", size = 12857, upload-time = "2026-01-12T14:28:08.985Z" },
 ]
 
 [[package]]
