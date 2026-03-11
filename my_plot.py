@@ -66,8 +66,8 @@ def set_ticks(ax: Axes) -> None:
     ax.tick_params(direction='in', right=True, top=True)
     ax.tick_params(labelsize=12)
     ax.tick_params(labelbottom=True, labeltop=False, labelright=False, labelleft=True)
-    ax.tick_params(direction='in', which='minor', length=5, bottom=True, top=True, left=True, right=True)
-    ax.tick_params(direction='in', which='major', length=10, bottom=True, top=True, left=True, right=True)
+    ax.tick_params(direction='in', which='minor', length=4, bottom=True, top=True, left=True, right=True)
+    ax.tick_params(direction='in', which='major', length=8, bottom=True, top=True, left=True, right=True)
 
     ax.grid(True, which='both', linestyle='--', linewidth=0.3, alpha=0.7)
 
