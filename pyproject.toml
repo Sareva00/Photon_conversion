@@ -11,6 +11,7 @@ dependencies = [
     "scipy>=1.16.3",
     "seaborn>=0.13.2",
     "simpy>=4.1.1",
+    "sympy>=1.14.0",
     "tol-colors>=2.2.0",
 ]
 

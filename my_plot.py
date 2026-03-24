@@ -69,7 +69,9 @@ def set_ticks(ax: Axes) -> None:
     ax.tick_params(direction='in', which='minor', length=4, bottom=True, top=True, left=True, right=True)
     ax.tick_params(direction='in', which='major', length=8, bottom=True, top=True, left=True, right=True)
 
-    ax.grid(True, which='both', linestyle='--', linewidth=0.3, alpha=0.7)
+    ax.grid(which='major', axis='y', linestyle='--', linewidth=0.3, alpha=0.5)  # Solo major su x
+    ax.grid(which='both', axis='x', linestyle='--', linewidth=0.3, alpha=0.5)   # Major+minor su y
+    
 
 def set_labels(ax: Axes, x_label: str, x_log: bool, y_label: str, y_log: bool, title: str) -> None:
     """Set customised labels and title for a given Axes object."""
