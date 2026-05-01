@@ -11,7 +11,7 @@ from matplotlib.axes import Axes
 from matplotlib.ticker import AutoMinorLocator, MaxNLocator, ScalarFormatter
 import seaborn as sns
 
-plt.rcParams['font.size']=12
+plt.rcParams['font.size']=14
 width =  508.0  # in pt, for two columns papers in A&A, ApJ, MNRAS
 widthcol = 244
 
@@ -79,7 +79,7 @@ def set_labels(ax: Axes, x_label: str, x_log: bool, y_label: str, y_log: bool, t
     ax.set_ylabel(y_label)
 
     if title is not None:
-        ax.set_title(title, fontsize=14, fontweight='bold', pad=15)
+        ax.set_title(title, fontsize=20, fontweight='bold', pad=15)
 
     if x_log:
         ax.set_xscale('log')
