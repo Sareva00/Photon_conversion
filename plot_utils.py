@@ -1,0 +1,81 @@
+import matplotlib.pyplot as plt
+from matplotlib.ticker import ScalarFormatter
+import seaborn as sns
+import tol_colors as tc
+ 
+# --- Figure dimensions ---
+ 
+width    = 508.0   # full two-column width in pt (A&A / ApJ / MNRAS)
+widthcol = 244.0   # single column width in pt
+ 
+ 
+def set_size(width: float, fraction: float = 1.0, subplots: tuple = (1, 1)) -> tuple:
+    """Return (width_in, height_in) for a figure, sized to avoid LaTeX scaling.
+ 
+    Parameters
+    ----------
+    width    : document textwidth or columnwidth in pt
+    fraction : fraction of width the figure should occupy
+    subplots : (nrows, ncols) — adjusts height proportionally
+    """
+    fig_width_pt = width * fraction
+    inches_per_pt = 1 / 72.27
+    golden_ratio = (5**0.5 - 1) / 2
+ 
+    fig_width_in  = fig_width_pt * inches_per_pt
+    fig_height_in = fig_width_in * golden_ratio * (subplots[0] / subplots[1])
+ 
+    return (fig_width_in, fig_height_in)
+ 
+ 
+# --- Scientific notation formatter ---
+ 
+def sci_formatter() -> ScalarFormatter:
+    """Return a ScalarFormatter that always uses scientific notation."""
+    f = ScalarFormatter(useOffset=False, useMathText=True)
+    f.set_scientific(True)
+    f.set_powerlimits((0, 0))
+    return f
+ 
+ 
+# --- Color palettes ---
+ 
+def set_colors(num: int, palette: str = "rocket") -> list:
+    """Return a list of `num` colors from the specified palette.
+ 
+    Built-in named palettes
+    -----------------------
+    'personal'    : 8-color custom palette
+    'dark_photons': 5-color palette for dark photon plots
+    Any seaborn palette name (e.g. 'rocket', 'mako', 'viridis')
+    Any matplotlib colormap name (e.g. 'Spectral')
+    """
+    if palette == "personal":
+        colors = ['#c3121e', '#0348a1', '#ffb01c', '#027608',
+                  '#0193b0', '#9c5300', '#949c01', '#7104b5']
+        if num > len(colors):
+            raise ValueError(f"'personal' palette only has {len(colors)} colors; requested {num}.")
+        return colors[:num]
+ 
+    if palette == "dark_photons":
+        colors = ["#5386e4", "#4c4b63", "#ce5374", "#ffba08", "#629677"]
+        if num > len(colors):
+            raise ValueError(f"'dark_photons' palette only has {len(colors)} colors; requested {num}.")
+        return colors[:num]
+ 
+    if palette in sns.palettes.SEABORN_PALETTES:
+        return sns.color_palette(palette, num)
+ 
+    if palette in plt.colormaps:
+        return plt.colormaps[palette].resampled(num).colors[:num]
+    
+    if palette in tc.colorsets:
+        colors = list(tc.colorsets[palette])
+        if num > len(colors):
+            raise ValueError(f"'tol_colors' palette '{palette}' only has {len(colors)} colors; requested {num}.")
+        return colors[:num]
+ 
+    raise ValueError(
+        f"Palette '{palette}' not recognised. "
+        "Choose 'personal', 'dark_photons', a seaborn palette, or a matplotlib colormap."
+    )

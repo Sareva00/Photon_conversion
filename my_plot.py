@@ -11,9 +11,18 @@ from matplotlib.axes import Axes
 from matplotlib.ticker import AutoMinorLocator, MaxNLocator, ScalarFormatter
 import seaborn as sns
 
-plt.rcParams['font.size']=14
 width =  508.0  # in pt, for two columns papers in A&A, ApJ, MNRAS
 widthcol = 244
+
+# plt.rcParams['font.size']=22 # Default font size for text in plots, legend
+# font_title = 30
+# font_xylabels = 26
+# font_ticks = 26
+
+plt.rcParams['font.size']=16 # Default font size for text in plots, legend
+font_title = 24
+font_xylabels = 18
+font_ticks = 18
 
 f =  ScalarFormatter(useOffset=False, useMathText=True)
 f.set_scientific(True)
@@ -64,7 +73,7 @@ def set_ticks(ax: Axes) -> None:
     ax.xaxis.set_major_locator(MaxNLocator("auto", integer=True))
     ax.minorticks_on()
     ax.tick_params(direction='in', right=True, top=True)
-    ax.tick_params(labelsize=18)
+    ax.tick_params(labelsize=font_ticks, pad=10)
     ax.tick_params(labelbottom=True, labeltop=False, labelright=False, labelleft=True)
     ax.tick_params(direction='in', which='minor', length=4, bottom=True, top=True, left=True, right=True)
     ax.tick_params(direction='in', which='major', length=8, bottom=True, top=True, left=True, right=True)
@@ -75,11 +84,11 @@ def set_ticks(ax: Axes) -> None:
 
 def set_labels(ax: Axes, x_label: str, x_log: bool, y_label: str, y_log: bool, title: str) -> None:
     """Set customised labels and title for a given Axes object."""
-    ax.set_xlabel(x_label)
-    ax.set_ylabel(y_label)
+    ax.set_xlabel(x_label, fontsize = font_xylabels)
+    ax.set_ylabel(y_label, fontsize = font_xylabels)
 
     if title is not None:
-        ax.set_title(title, fontsize=20, fontweight='bold', pad=15)
+        ax.set_title(title, fontsize=font_title, fontweight='bold', pad=10)
 
     if x_log:
         ax.set_xscale('log')
