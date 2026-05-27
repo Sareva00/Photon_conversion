@@ -7,7 +7,7 @@ import tol_colors as tc
  
 width    = 508.0   # full two-column width in pt (A&A / ApJ / MNRAS)
 widthcol = 244.0   # single column width in pt
- 
+width_jcap = 440.0  # JCAP column width in pt
  
 def set_size(width: float, fraction: float = 1.0, subplots: tuple = (1, 1)) -> tuple:
     """Return (width_in, height_in) for a figure, sized to avoid LaTeX scaling.
@@ -45,10 +45,11 @@ def set_colors(num: int, palette: str = "rocket") -> list:
  
     Built-in named palettes
     -----------------------
-    'personal'    : 8-color custom palette
-    'dark_photons': 5-color palette for dark photon plots
-    Any seaborn palette name (e.g. 'rocket', 'mako', 'viridis')
-    Any matplotlib colormap name (e.g. 'Spectral')
+    'personal'      : 8-color custom palette
+    'dark_photons'  : 5-color palette for dark photon plots
+    'tol:<name>'    : tol_colors colorset, e.g. 'tol:vibrant', 'tol:bright'
+    'sns:<name>'    : seaborn palette, e.g. 'sns:rocket', 'sns:bright'
+    Any matplotlib colormap name (e.g. 'Spectral', 'viridis')
     """
     if palette == "personal":
         colors = ['#c3121e', '#0348a1', '#ffb01c', '#027608',
@@ -63,19 +64,24 @@ def set_colors(num: int, palette: str = "rocket") -> list:
             raise ValueError(f"'dark_photons' palette only has {len(colors)} colors; requested {num}.")
         return colors[:num]
  
-    if palette in sns.palettes.SEABORN_PALETTES:
-        return sns.color_palette(palette, num)
+    if palette.startswith("tol:"):
+        name = palette[4:]
+        if name not in tc.colorsets:
+            raise ValueError(f"tol_colors colorset '{name}' not recognised. Available: {list(tc.colorsets.keys())}")
+        colors = list(tc.colorsets[name])
+        if num > len(colors):
+            raise ValueError(f"'tol:{name}' only has {len(colors)} colors; requested {num}.")
+        return colors[:num]
+ 
+    if palette.startswith("sns:"):
+        name = palette[4:]
+        return sns.color_palette(name, num)
  
     if palette in plt.colormaps:
         return plt.colormaps[palette].resampled(num).colors[:num]
-    
-    if palette in tc.colorsets:
-        colors = list(tc.colorsets[palette])
-        if num > len(colors):
-            raise ValueError(f"'tol_colors' palette '{palette}' only has {len(colors)} colors; requested {num}.")
-        return colors[:num]
  
     raise ValueError(
         f"Palette '{palette}' not recognised. "
-        "Choose 'personal', 'dark_photons', a seaborn palette, or a matplotlib colormap."
+        "Use 'personal', 'dark_photons', 'tol:<name>', 'sns:<name>', or a matplotlib colormap."
     )
+
