@@ -9,22 +9,13 @@ width    = 508.0   # full two-column width in pt (A&A / ApJ / MNRAS)
 widthcol = 244.0   # single column width in pt
 width_jcap = 440.0  # JCAP column width in pt
  
-def set_size(width: float, fraction: float = 1.0, subplots: tuple = (1, 1)) -> tuple:
-    """Return (width_in, height_in) for a figure, sized to avoid LaTeX scaling.
- 
-    Parameters
-    ----------
-    width    : document textwidth or columnwidth in pt
-    fraction : fraction of width the figure should occupy
-    subplots : (nrows, ncols) — adjusts height proportionally
-    """
+def set_size(width, fraction=1.0, subplots=(1,1), ratio=None):
     fig_width_pt = width * fraction
     inches_per_pt = 1 / 72.27
-    golden_ratio = (5**0.5 - 1) / 2
- 
-    fig_width_in  = fig_width_pt * inches_per_pt
-    fig_height_in = fig_width_in * golden_ratio * (subplots[0] / subplots[1])
- 
+    if ratio is None:
+        ratio = (5**0.5 - 1) / 2  # golden ratio default
+    fig_width_in = fig_width_pt * inches_per_pt
+    fig_height_in = fig_width_in * ratio * (subplots[0] / subplots[1])
     return (fig_width_in, fig_height_in)
  
  
